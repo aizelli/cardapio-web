@@ -1,13 +1,21 @@
+using CardapioWeb.Context;
+using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography.X509Certificates;
+
 namespace CardapioWeb
 {
     public class Program
     {
         public static void Main(string[] args)
         {
+            
             var builder = WebApplication.CreateBuilder(args);
-
+            
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddDbContext<AppDBContext>(options =>
+                options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
+            );
 
             var app = builder.Build();
 
