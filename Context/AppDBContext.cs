@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CardapioWeb.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace CardapioWeb.Context
 {
@@ -6,5 +7,7 @@ namespace CardapioWeb.Context
     {
         public AppDBContext(DbContextOptions<AppDBContext> options): base(options) { }
 
+        public DbSet<Categoria> Categorias { get; set; }
+        public DbSet<Produto> Produtos { get; set; }
     }
 }
