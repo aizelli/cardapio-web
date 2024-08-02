@@ -1,0 +1,65 @@
+﻿@model IEnumerable<CardapioWeb.Models.Produto>
+
+@{
+    ViewData["Title"] = "ListarProdutos";
+}
+
+<h1>ListarProdutos</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descricao_Curta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descricao_Detalhada)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Preco)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Produto_Preferido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Em_Estoque)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descricao_Curta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descricao_Detalhada)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Preco)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Produto_Preferido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Em_Estoque)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

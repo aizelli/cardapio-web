@@ -1,4 +1,5 @@
 using CardapioWeb.Context;
+using CardapioWeb.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace CardapioWeb
@@ -14,6 +15,7 @@ namespace CardapioWeb
             builder.Services.AddDbContext<AppDBContext>(options =>
                 options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
             );
+            builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
             var app = builder.Build();
 
 
