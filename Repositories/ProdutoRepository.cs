@@ -5,26 +5,26 @@ namespace CardapioWeb.Repositories
 {
     public class ProdutoRepository : IProdutoRepository
     {
-        private readonly AppDBContext _dbcontext;
+        private readonly AppDBContext _dbContext;
 
-        public ProdutoRepository(AppDBContext dbcontext)
+        public ProdutoRepository(AppDBContext dbContext)
         {
-            _dbcontext = dbcontext;
+            _dbContext = dbContext;
         }
 
         public IEnumerable<Produto> GetAll()
         {
-            throw new NotImplementedException();
+            return _dbContext.Produtos.ToList();
         }
 
         public Produto GetById(int id)
         {
-            throw new NotImplementedException();
+            return _dbContext.Produtos.FirstOrDefault(p => p.Id == id);
         }
 
         public IEnumerable<Produto> GetByPreferido()
         {
-            throw new NotImplementedException();
+            return _dbContext.Produtos.Where(p => p.Produto_Preferido == true).ToList();
         }
     }
 }

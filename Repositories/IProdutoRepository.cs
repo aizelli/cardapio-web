@@ -4,8 +4,8 @@ namespace CardapioWeb.Repositories
 {
     public interface IProdutoRepository
     {
-        public IEnumerable<Produto> GetAll();
-        public Produto GetById(int id);
-        public IEnumerable<Produto> GetByPreferido();
+        IEnumerable<Produto> GetAll();
+        IEnumerable<Produto> GetByPreferido();
+        Produto GetById(int id);
     }
 }

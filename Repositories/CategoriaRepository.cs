@@ -5,14 +5,16 @@ namespace CardapioWeb.Repositories
 {
     public class CategoriaRepository : ICategoriaRepository
     {
-        private readonly AppDBContext _dbcontext;
-        public CategoriaRepository(AppDBContext dbcontext)
+        private readonly AppDBContext _dbContext;
+
+        public CategoriaRepository(AppDBContext dbContext)
         {
-            _dbcontext = dbcontext;
+            _dbContext = dbContext;
         }
+
         public IEnumerable<Categoria> GetAll()
         {
-            return _dbcontext.Categorias.ToList();
+            return _dbContext.Categorias.ToList();
         }
     }
 }
