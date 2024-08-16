@@ -12,12 +12,12 @@ namespace CardapioWeb.Models
 
         [Display(Name ="Nome da categoria")]
         [Required(ErrorMessage ="Compo obrigatório")]
-        [StringLength(50, MinimumLength = 10, ErrorMessage = "O {0} deve ter no mínimo {1} e no máximo 50 caracteres")]
+        [StringLength(50, MinimumLength = 5, ErrorMessage = "O {0} deve ter no mínimo {1} e no máximo 50 caracteres")]
         public string Nome { get; set; }
 
         [Display(Name = "Descrição da categoria")]
         [Required(ErrorMessage = "Compo obrigatório")]
-        [StringLength(200, MinimumLength = 10, ErrorMessage = "O {0} deve ter no mínimo {1} e no máximo 200 caracteres")]
+        [StringLength(200, MinimumLength = 5, ErrorMessage = "O {0} deve ter no mínimo {1} e no máximo 200 caracteres")]
         public string Descricao { get; set; }
 
         public List<Produto> Produtos { get; set; } 
