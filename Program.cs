@@ -28,20 +28,16 @@ namespace CardapioWeb
             app.UseRouting();
 
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Produto}/{action=ListarProdutos}/{id?}"
+                  name: "areas",
+                  pattern: "{area:exists}/{controller=Admin}/{action=Index}/{id?}"
                 );
-
                 endpoints.MapControllerRoute(
-                name: "areas",
-                pattern: "{area:exists}/{controller=Admin}/{action=Index}/{id?}"
-                );
+                    name: "default",
+                    pattern: "{controller=Produto}/{action=ListarProdutos}/{id?}");
             });
-
 
             app.Run();
         }

@@ -4,6 +4,10 @@ namespace CardapioWeb.Repositories
 {
     public interface ICategoriaRepository
     {
-        IEnumerable<Categoria> GetAll();
+        Task<List<Categoria>> GetAll();
+        Task<Categoria> GetById(int id);
+        Task Add(Categoria categoria);
+        Task Update(Categoria categoria);
+        Task Delete(Categoria categoria);    
     }
 }

@@ -12,8 +12,7 @@ namespace CardapioWeb.Controllers
             _produtoRepository = produtoRepository;
         }
 
-        public IActionResult ListarProdutos()
-        {
+        public IActionResult ListarProdutos() { 
             var produtos = _produtoRepository.GetAll();
             return View(produtos);
         }
