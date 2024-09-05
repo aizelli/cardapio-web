@@ -1,13 +1,17 @@
 ﻿@model IEnumerable<CardapioWeb.Models.Categoria>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Lista de categorias";
 }
 
-<h1>Index</h1>
+<h1>Categorias</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a 
+        asp-area="Admin" 
+        asp-controller="AdminCategorias" 
+        asp-action="Cadastro"
+    >Adicionar nova categoria</a>
 </p>
 <table class="table">
     <thead>
@@ -31,9 +35,9 @@
                 @Html.DisplayFor(modelItem => item.Descricao)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-area="Admin" asp-controller="AdminCategorias" asp-action="Edicao" asp-route-id="@item.Id">Editar</a> |
+                <a asp-area="Admin" asp-controller="AdminCategorias" asp-action="Detalhes" asp-route-id="@item.Id">Detalhes</a> |
+                <a asp-area="Admin" asp-controller="AdminCategorias" asp-action="Delete" asp-route-id="@item.Id">Excluir</a>
             </td>
         </tr>
 }

@@ -62,5 +62,6 @@ namespace CardapioWeb.Repositories
         {
             return await _dbContext.Categorias.ToListAsync();
         }
+
     }
 }

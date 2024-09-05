@@ -24,7 +24,7 @@ namespace CardapioWeb.Areas.Admin.Controllers
         // GET: Admin/AdminCategorias
         public async Task<IActionResult> Index()
         {
-              return _categoriaRepository.GetAll() != null ? 
+              return await _categoriaRepository.GetAll() != null ? 
                           View(await _categoriaRepository.GetAll()) :
                           Problem("Nenhum registro encontrado");
         }
