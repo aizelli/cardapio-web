@@ -4,10 +4,10 @@
     ViewData["Title"] = "ListarProdutos";
 }
 
-<h1>ListarProdutos</h1>
+<h1>Produtos</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Cadastrar">Cadastrar</a>
 </p>
 <table class="table">
     <thead>
@@ -23,6 +23,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Preco)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Local_Imagem)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Produto_Preferido)
@@ -49,15 +52,18 @@
                 @Html.DisplayFor(modelItem => item.Preco)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.Local_Imagem)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Produto_Preferido)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Em_Estoque)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Editar" asp-route-id="@item.Id">Edita</a> |
+                <a asp-action="Detales" asp-route-id="@item.Id">Detales</a> |
+                <a asp-action="Excluir" asp-route-id="@item.Id">Excluir</a>
             </td>
         </tr>
 }

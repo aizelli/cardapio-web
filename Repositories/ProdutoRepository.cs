@@ -1,5 +1,7 @@
 ﻿using CardapioWeb.Context;
 using CardapioWeb.Models;
+using Microsoft.EntityFrameworkCore;
+using System.Runtime.CompilerServices;
 
 namespace CardapioWeb.Repositories
 {
@@ -14,7 +16,7 @@ namespace CardapioWeb.Repositories
 
         public IEnumerable<Produto> GetAll()
         {
-            return _dbContext.Produtos.ToList();
+            return _dbContext.Produtos.Include(c => c.Categoria).ToList();
         }
 
         public Produto GetById(int id)
@@ -24,7 +26,7 @@ namespace CardapioWeb.Repositories
 
         public IEnumerable<Produto> GetByPreferido()
         {
-            return _dbContext.Produtos.Where(p => p.Produto_Preferido == true).ToList();
+            return _dbContext.Produtos.Where(p => p.Produto_Preferido).Include(c => c.Categoria).ToList();
         }
     }
 }
