@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using CardapioWeb.Context;
+﻿using Microsoft.AspNetCore.Mvc;
 using CardapioWeb.Models;
 using CardapioWeb.Repositories;
 
@@ -87,21 +80,7 @@ namespace CardapioWeb.Areas.Admin.Controllers
 
             if (categoria != null)
             {
-                try
-                {
-                    await _categoriaRepository.Update(categoria);
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CategoriaExists(categoria.Id))
-                    {
-                    return NotFound();
-                }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                await _categoriaRepository.Update(categoria);
                 return RedirectToAction(nameof(Index));
             }
             return View(categoria);
@@ -129,14 +108,7 @@ namespace CardapioWeb.Areas.Admin.Controllers
             {
                 await _categoriaRepository.Delete(categoria);
             }
-
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool CategoriaExists(int id)
-        {
-          return (_context.Categorias?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

@@ -33,6 +33,11 @@ namespace CardapioWeb.Repositories
             {
             _dbContext.Categorias.Remove(categoria);
             await _dbContext.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                await Task.FromException(ex);
+            }
         }
 
         public async Task<List<Categoria>> GetAll()
@@ -57,11 +62,6 @@ namespace CardapioWeb.Repositories
             {
                 await Task.FromException(ex);
             }
-        }
-
-        public async Task<List<Categoria>> GetAll()
-        {
-            return await _dbContext.Categorias.ToListAsync();
         }
     }
 }
