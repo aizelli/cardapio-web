@@ -1,4 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CardapioWeb.Context;
 using CardapioWeb.Models;
@@ -19,8 +24,9 @@ namespace CardapioWeb.Areas.Admin.Controllers
         // GET: Admin/AdminCategorias
         public async Task<IActionResult> Index()
         {
-            var categorias = await _categoriaRepository.GetAll();
-            return View(categorias);
+            return await _categoriaRepository.GetAll() != null ?
+                        View(await _categoriaRepository.GetAll()) :
+                        Problem("Entity set 'AppDBContext.Categorias'  is null.");
         }
 
         // GET: Admin/AdminCategorias/Detalhes/5
@@ -51,13 +57,12 @@ namespace CardapioWeb.Areas.Admin.Controllers
             if (categoria != null)
             {
                 await _categoriaRepository.Add(categoria);
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             }
-
-            return View();
+            return View(categoria);
         }
 
-        // GET: Admin/AdminCategorias/Edicao/5
+        // GET: Admin/Categorias/Edicao/5
         public async Task<IActionResult> Edicao(int id)
         {
             var categoria = await _categoriaRepository.GetById(id);
@@ -69,7 +74,7 @@ namespace CardapioWeb.Areas.Admin.Controllers
             return View(categoria);
         }
 
-        // POST: Admin/AdminCategorias/Edicao/5
+        // POST: Admin/Categorias/Edicao/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -83,14 +88,28 @@ namespace CardapioWeb.Areas.Admin.Controllers
 
             if (categoria != null)
             {
-                await _categoriaRepository.Update(categoria);
+                try
+                {
+                    await _categoriaRepository.Update(categoria);
                 return RedirectToAction("Index");
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!CategoriaExists(categoria.Id))
+                    {
+                    return NotFound();
+                }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
             }
-
             return View(categoria);
         }
 
-        // GET: Admin/AdminCategorias/Delete/5
+        // GET: Admin/Categorias/Delete/5
         public async Task<IActionResult> Delete(int id)
         {
             var categoria = await _categoriaRepository.GetById(id);
@@ -102,7 +121,7 @@ namespace CardapioWeb.Areas.Admin.Controllers
             return View(categoria);
         }
 
-        // POST: Admin/AdminCategorias/Delete/5
+        // POST: Admin/Categorias/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -113,7 +132,13 @@ namespace CardapioWeb.Areas.Admin.Controllers
                 await _categoriaRepository.Delete(categoria);
             }
 
-            return RedirectToAction("Index");
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool CategoriaExists(int id)
+        {
+          return (_context.Categorias?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

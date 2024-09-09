@@ -1,12 +1,11 @@
 ﻿@model CardapioWeb.Models.Categoria
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Details";
 }
 
-<h1>Delete</h1>
+<h1>Detalhes</h1>
 
-<h3>ATem certeza que deseja excluir o registro?</h3>
 <div>
     <h4>Categoria</h4>
     <hr />
@@ -24,10 +23,8 @@
             @Html.DisplayFor(model => model.Descricao)
         </dd>
     </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Voltar para lista</a>
-    </form>
+</div>
+<div>
+    <a asp-action="Edicao" asp-route-id="@Model?.Id">Editar</a> |
+    <a asp-action="Index">Voltar para lista</a>
 </div>

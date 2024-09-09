@@ -17,27 +17,22 @@ namespace CardapioWeb.Repositories
         {
             try
             {
-                _dbContext.Categorias.Add(categoria);
+                _dbContext.Add(categoria);
                 await _dbContext.SaveChangesAsync();
             }
             catch (Exception ex)
             {
                 await Task.FromException(ex);
             }
-            
+
         }
 
         public async Task Delete(Categoria categoria)
         {
             try
             {
-                _dbContext.Categorias.Remove(categoria);
-                await _dbContext.SaveChangesAsync();
-            }
-            catch (Exception ex)
-            {
-                await Task.FromException(ex);
-            }
+            _dbContext.Categorias.Remove(categoria);
+            await _dbContext.SaveChangesAsync();
         }
 
         public async Task<List<Categoria>> GetAll()
@@ -47,20 +42,26 @@ namespace CardapioWeb.Repositories
 
         public async Task<Categoria> GetById(int id)
         {
-            return await _dbContext.Categorias.FirstOrDefaultAsync();
+            return await _dbContext.Categorias.FirstOrDefaultAsync(c => c.Id == id);
+
         }
 
         public async Task Update(Categoria categoria)
         {
             try
             {
-                _dbContext.Categorias.Update(categoria);
-                await _dbContext.SaveChangesAsync();
-            }
+            _dbContext.Categorias.Update(categoria);
+            await _dbContext.SaveChangesAsync();
+        }
             catch (Exception ex)
             {
                 await Task.FromException(ex);
             }
+        }
+
+        public async Task<List<Categoria>> GetAll()
+        {
+            return await _dbContext.Categorias.ToListAsync();
         }
     }
 }

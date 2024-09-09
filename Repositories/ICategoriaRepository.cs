@@ -9,5 +9,6 @@ namespace CardapioWeb.Repositories
         Task Add(Categoria categoria);
         Task Update(Categoria categoria);
         Task Delete(Categoria categoria);
+
     }
 }
